@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="5dp"
+    app:cardUseCompatPadding="true">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/image"
+            android:src="@drawable/sepatu"
+            android:layout_width="165dp"
+            android:layout_height="120dp" />
+        <TextView
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:layout_below="@id/image"
+            android:id="@+id/title"
+            android:text="Sepatu Olahraga Kasual Size 35 - Black"
+            android:maxWidth="150dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:padding="5dp"
+            android:id="@+id/price"
+            android:layout_below="@id/title"
+            android:text="Rp. 5.000.000"
+            android:maxWidth="150dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</android.support.v7.widget.CardView>

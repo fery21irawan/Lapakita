@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+    <LinearLayout
+        android:padding="10dp"
+        android:background="@color/colorPrimaryDark"
+        android:id="@+id/headprofil"
+        android:layout_marginBottom="5dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/p_image"
+            android:scaleType="fitXY"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_launcher_round"/>
+    <TextView
+        android:id="@+id/p_nama"
+        android:textColor="#fff"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:text="CV. As-Shohabah Borneo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+        <TextView
+            android:textColor="#ddd"
+            android:textSize="14sp"
+            android:textAlignment="center"
+            android:text="Peternakan, Pengembangan Software, dll."
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/p_alamat"
+            android:textColor="#fff"
+            android:textSize="14sp"
+            android:textAlignment="center"
+            android:text="Jl. Tidar Utama Gg. Mandiri No. 19"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/btnCall"
+                android:visibility="gone"
+                android:layout_weight="1"
+                android:text="Hubungi Penjual"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/btnChat"
+                android:visibility="gone"
+                android:layout_weight="1"
+                android:text="Chat melalui whatsapp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/btnSettings"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edit Profil" />
+        </LinearLayout>
+    </LinearLayout>
+
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/swlayout"
+                android:visibility="gone"
+                android:layout_below="@id/headprofil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <android.support.v7.widget.RecyclerView
+
+                    android:id="@+id/recylcerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </android.support.v4.widget.SwipeRefreshLayout>
+        </RelativeLayout>
+</RelativeLayout>
