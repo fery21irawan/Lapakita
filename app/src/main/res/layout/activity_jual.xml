@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="#eee"
+    android:layout_height="match_parent">
+<android.support.v7.widget.CardView
+    android:layout_margin="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <Button
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:textColor="#FFF"
+        android:background="#606062"
+        android:text="Upload Image"
+        android:layout_gravity="center"
+        android:padding="20dp"
+        android:id="@+id/pickImgaeButton"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content" />
+    <android.support.v4.widget.NestedScrollView
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+    <ImageView
+        android:layout_gravity="center"
+        android:layout_width="150dp"
+        android:id="@+id/previewImage"
+        android:layout_height="150dp" />
+    <EditText
+        android:layout_width="match_parent"
+        android:textColorHint="#c9c5c5"
+        android:id="@+id/name"
+        android:inputType="text"
+        android:hint="Nama Produk"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:textColor="#c9c5c5"
+        android:text=" Kategori"
+        android:textSize="18sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/i_kategori"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/s_kategori"
+                android:layout_width="match_parent"
+                android:textColorHint="#c9c5c5"
+                android:inputType="text"
+                android:cursorVisible="false"
+                android:drawableEnd="@android:drawable/ic_menu_edit"
+                android:hint="Pilih Kategori"
+                android:layout_height="wrap_content" />
+    <EditText
+        android:layout_width="match_parent"
+        android:textColorHint="#c9c5c5"
+        android:id="@+id/keterangan"
+        android:lines="3"
+        android:layout_marginBottom="10dp"
+        android:inputType="text|textMultiLine"
+        android:hint="Tambahkan Keterangan"
+        android:layout_height="wrap_content" />
+            <EditText
+                android:layout_width="match_parent"
+                android:textColorHint="#c9c5c5"
+                android:id="@+id/harga"
+                android:inputType="number"
+                android:hint="Masukan Harga Produk"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
+    <Button
+        android:id="@+id/upload"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:background="@color/colorPrimary"
+        android:padding="20dp"
+        android:text="Upload"
+        android:textColor="#FFF" />
+
+</RelativeLayout>

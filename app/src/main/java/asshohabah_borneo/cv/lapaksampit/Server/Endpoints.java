@@ -11,7 +11,7 @@ public class Endpoints {
      * Genymotion = http://10.0.3.2/lapaksampit/
      * hostingan yang digunakan = http://lapaksampit.mataharimedia.com/
      */
-    public static String Base_URL               = "http://10.0.2.2/lapaksampit/";
+    public static String Base_URL               = "http://lapaksampit.mataharimedia.com/";
 
     /**
      * Setting tags JSON pada PHP
@@ -22,6 +22,7 @@ public class Endpoints {
      * Table Produk.
      */
     public static String Produk_URL         = Base_URL+"produk.php";
+    public static String Produk_ADD_URL     = Base_URL+"upload.php";
     public static String Produk_Special_URL = Base_URL+"produk_special.php";
     public static String Produk_ID          = "id_produk";
     public static String Produk_KD          = "kd_produk";
@@ -33,6 +34,7 @@ public class Endpoints {
     /**
      * Table Kategori
      */
+    public static String Kategori_URL       = Base_URL+"get_kategori.php";
     public static String Kategori_KD        = "kd_kategori";
     public static String Kategori_NM        = "nm_kategori";
 

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:fitsSystemWindows="true"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/toolbar_layout"
+            app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:toolbarId="@+id/toolbar">
+            <!--TAMPILKAN GAMBAR-->
+            <ImageView
+                android:id="@+id/ivGambarBerita"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@mipmap/ic_logo_lapak"
+                android:scaleType="fitXY"/>
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <include layout="@layout/content_detail_produk" />
+
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/fab_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="@dimen/fab_margin"
+        android:layout_gravity="bottom"
+        app:layout_anchor="@id/app_bar"
+        app:layout_anchorGravity="bottom|end"
+        app:menu_labels_textColor="#000000"
+        app:menu_labels_colorNormal="#FFFFFF"
+        app:menu_labels_colorPressed="#BDBDBD"
+        app:fab_size="normal"
+        app:menu_backgroundColor="@android:color/transparent"
+        app:menu_colorNormal="@color/colorAccent"
+        app:menu_colorPressed="#FF00786D"
+        app:menu_icon="@android:drawable/ic_menu_call"
+        app:menu_labels_showShadow="true"
+        app:menu_openDirection="up"
+        app:menu_showShadow="true">
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fb_no_telp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_label="Via Telepon"
+            android:src="@drawable/ic_phone_receiver"
+            app:fab_colorNormal="@color/colorAccent"
+            app:fab_colorPressed="#FF00786D"
+            app:fab_size="mini" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fb_no_wa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_label="Via Whatsapp"
+            android:src="@drawable/ic_whatsapp"
+            app:fab_colorNormal="@color/colorAccent"
+            app:fab_colorPressed="#FF00786D"
+            app:fab_size="mini" />
+
+    </com.github.clans.fab.FloatingActionMenu>
+</android.support.design.widget.CoordinatorLayout>

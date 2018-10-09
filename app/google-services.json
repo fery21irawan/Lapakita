@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "564534539330",
+    "firebase_url": "https://my-revisi.firebaseio.com",
+    "project_id": "my-revisi",
+    "storage_bucket": "my-revisi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:564534539330:android:06a5849d0ec79505",
+        "android_client_info": {
+          "package_name": "asshohabah_borneo.cv.lapaksampit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "564534539330-bv1ibvd1ckb41k8rjc8oth6lvc255hgq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "asshohabah_borneo.cv.lapaksampit",
+            "certificate_hash": "c18fc21bc4a3fcc63bc46322e6feb76f6579dc39"
+          }
+        },
+        {
+          "client_id": "564534539330-t1jj3l7ftj89jh25kdd8u0icku7pq0sj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8OtOJX8KNO4uwCOrK6uwcCrDGn3ULdcI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "564534539330-t1jj3l7ftj89jh25kdd8u0icku7pq0sj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

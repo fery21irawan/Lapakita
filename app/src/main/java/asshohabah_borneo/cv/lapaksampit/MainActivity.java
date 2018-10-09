@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import com.mancj.materialsearchbar.MaterialSearchBar;
 
 import asshohabah_borneo.cv.lapaksampit.Home.HomeFragment;
+import asshohabah_borneo.cv.lapaksampit.Jual.JualActivity;
 import asshohabah_borneo.cv.lapaksampit.Me.MeFragment;
 import asshohabah_borneo.cv.lapaksampit.Server.Endpoints;
 import asshohabah_borneo.cv.lapaksampit.Timeline.TimelineFragment;
@@ -51,10 +52,12 @@ public class MainActivity extends AppCompatActivity implements MaterialSearchBar
                             new TimelineFragment()).commit();
                     return true;
                 case R.id.navigation_jual:
-                    linearLayout.setVisibility(View.VISIBLE);
-                    Intent openGalleryIntent = new Intent(Intent.ACTION_PICK);
-                    openGalleryIntent.setType("image/*");
-                    startActivityForResult(openGalleryIntent, REQUEST_GALLERY_CODE);
+                    Endpoints.loggedIn = sharedPreferences.getBoolean(Endpoints.SharedPref_Loggedin, false);
+                    if (Endpoints.loggedIn) {
+                        startActivity(new Intent(MainActivity.this, JualActivity.class));
+                    }else{
+                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                    }
                     return true;
                 case R.id.navigation_pesan:
                     linearLayout.setVisibility(View.VISIBLE);

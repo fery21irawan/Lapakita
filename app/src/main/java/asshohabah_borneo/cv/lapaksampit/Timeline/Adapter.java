@@ -1,6 +1,8 @@
 package asshohabah_borneo.cv.lapaksampit.Timeline;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +16,9 @@ import com.daimajia.androidanimations.library.YoYo;
 
 import java.util.List;
 
+import asshohabah_borneo.cv.lapaksampit.Produk.DetailProdukActivity;
 import asshohabah_borneo.cv.lapaksampit.R;
+import asshohabah_borneo.cv.lapaksampit.Server.Endpoints;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
@@ -48,7 +52,15 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mCtx, "Anda Menyentuh "+Name, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(mCtx, DetailProdukActivity.class);
+                intent.putExtra(Endpoints.Produk_NM, GetModel.getNm_produk());
+                intent.putExtra(Endpoints.Produk_GBR, GetModel.getGbr_produk());
+                intent.putExtra(Endpoints.Pengguna_No_Telp, GetModel.getNo_telp());
+                intent.putExtra(Endpoints.Pengguna_No_WA, GetModel.getNo_wa());
+                intent.putExtra(Endpoints.Produk_Keterangan, GetModel.getKeterangan());
+                intent.putExtra(Endpoints.Pengguna_Alamat, GetModel.getAlamat());
+                intent.putExtra(Endpoints.Produk_Harga, GetModel.getHarga());
+                mCtx.startActivity(intent);
             }
         });
     }

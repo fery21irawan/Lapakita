@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
+import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +24,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,6 +41,7 @@ import asshohabah_borneo.cv.lapaksampit.Server.RequestHandler;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final String TAG = "LoginActivity";
     TextView signin, signup, signin_signup_txt, forgot_password;
     CircleImageView circleImageView;
     Button masuk, daftar;
@@ -88,8 +95,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 signup.setTextColor(Color.parseColor("#FF2729C3"));
                 signup.setBackgroundResource(R.drawable.bordershape);
                 circleImageView.setImageResource(R.drawable.sigin_boy_img);
-                signin_signup_txt.setText("Sign In");
-                masuk.setText("Sign In");
+                signin_signup_txt.setText("MASUK");
+                masuk.setText("Masuk");
                 forgot_password.setVisibility(View.VISIBLE);
                 masuk.setVisibility(View.VISIBLE);
                 if (layoutSignup.getVisibility() == View.VISIBLE && daftar.getVisibility() == View.VISIBLE) {
@@ -108,8 +115,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 signin.setTextColor(Color.parseColor("#FF2729C3"));
                 signin.setBackgroundResource(R.drawable.bordershape);
                 circleImageView.setImageResource(R.drawable.sigup_boy_img);
-                signin_signup_txt.setText("Sign Up");
-                masuk.setText("Sign Up");
+                signin_signup_txt.setText("DAFTAR");
+                masuk.setText("Daftar");
                 forgot_password.setVisibility(View.INVISIBLE);
                 layoutSignup.setVisibility(View.VISIBLE);
                 daftar.setVisibility(View.VISIBLE);
@@ -139,6 +146,60 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void Register() {
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "getInstanceId failed", task.getException());
+                            return;
+                        }
+                        final String $NamaLengkap = NamaLengkap.getText().toString().trim();
+                        final String $Alamat  = Alamat.getText().toString().trim();
+                        final String $NoHp = NoHp.getText().toString().trim();
+                        final String $NoWA = NoWA.getText().toString().trim();
+                        final String $Username = Username.getText().toString().trim();
+                        final String $Password = Password.getText().toString().trim();
+                        // Get new Instance ID token
+                        final String token = task.getResult().getToken();
+
+                        // Log and toast
+                        /*String msg = getString(R.string.msg_token_fmt, token);
+                        Log.d(TAG, msg);
+                        Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT).show();*/
+                        RequestQueue requestQueue = Volley.newRequestQueue(LoginActivity.this);
+                        StringRequest stringRequest = new StringRequest(Request.Method.POST, Endpoints.Pengguna_Register_URL, new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                if(response.contains("success")) {
+                                    Toast.makeText(getApplicationContext(), "success", Toast.LENGTH_SHORT).show();
+                                }else{
+                                    Toast.makeText(getApplicationContext(), "Mohon Maaf Akun tidak tersedia", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Toast.makeText(getApplicationContext(),"failed",Toast.LENGTH_SHORT).show();
+                            }
+                        }){
+                            @Override
+                            protected Map<String, String> getParams() throws AuthFailureError {
+                                Map<String, String> params = new HashMap<>();
+                                params.put(Endpoints.Pengguna_NM, $NamaLengkap);
+                                params.put(Endpoints.Pengguna_Alamat, $Alamat);
+                                params.put(Endpoints.Pengguna_No_Telp, $NoHp);
+                                params.put(Endpoints.Pengguna_No_WA, $NoWA);
+                                params.put(Endpoints.Pengguna_Username, $Username);
+                                params.put(Endpoints.Pengguna_Password, $Password);
+                                params.put(Endpoints.Pengguna_Kunci, token);
+                                return params;
+                            }
+                        };
+                        requestQueue.add(stringRequest);
+                    }
+                });
+
 
     }
     private void login(final String user, final String pass){
