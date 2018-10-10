@@ -246,6 +246,7 @@ Log.d("lihat", Public_No_Telp);
 
                     startActivity(intent);
                 } catch (JSONException e) {
+                    Toast.makeText(LoginActivity.this, "Username or Password Salah", Toast.LENGTH_LONG).show();
                     e.printStackTrace();
                 }
             }

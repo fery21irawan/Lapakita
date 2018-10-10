@@ -1,8 +1,5 @@
 package asshohabah_borneo.cv.lapaksampit.Server;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class Endpoints {
 
     /**
@@ -75,13 +72,4 @@ public class Endpoints {
     public static final String SharedPref_Loggedin  = "penggunalogin";
     public static Boolean loggedIn                  = false;
 
-
-    public static final String[] Public_KD = new String[1];
-    public static final String[] Public_NM = new String[1];
-    public static final String[] Public_Username = new String[1];
-    public static final String[] Public_Password = new String[1];
-    public static final String[] Public_Alamat = new String[1];
-    public static final String[] Public_No_Telp = new String[1];
-    public static final String[] Public_No_Wa = new String[1];
-    public static final String[] Public_Kunci = new String[1];
 }

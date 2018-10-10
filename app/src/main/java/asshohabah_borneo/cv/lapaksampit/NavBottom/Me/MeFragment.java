@@ -69,7 +69,7 @@ public class MeFragment extends Fragment implements SwipeRefreshLayout.OnRefresh
         btnSettings = view.findViewById(R.id.btnSettings);
         btnCall.setText(sharedPreferences.getString(Endpoints.SharedPref_No_Telp, ""));
         btnSettings.setVisibility(View.VISIBLE);
-        btnSettings.setText("Logout");
+        btnSettings.setText("Edit Profile");
         btnSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

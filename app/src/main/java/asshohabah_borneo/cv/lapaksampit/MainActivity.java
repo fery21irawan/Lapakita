@@ -10,18 +10,18 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 
 import com.mancj.materialsearchbar.MaterialSearchBar;
 
-import asshohabah_borneo.cv.lapaksampit.Home.HomeFragment;
-import asshohabah_borneo.cv.lapaksampit.Jual.JualActivity;
-import asshohabah_borneo.cv.lapaksampit.Me.MeFragment;
+import asshohabah_borneo.cv.lapaksampit.NavBottom.Home.HomeFragment;
+import asshohabah_borneo.cv.lapaksampit.NavBottom.Jual.JualActivity;
+import asshohabah_borneo.cv.lapaksampit.NavBottom.Lainnya.MoreFragment;
+import asshohabah_borneo.cv.lapaksampit.NavBottom.Me.MeFragment;
 import asshohabah_borneo.cv.lapaksampit.Server.Endpoints;
-import asshohabah_borneo.cv.lapaksampit.Timeline.TimelineFragment;
+import asshohabah_borneo.cv.lapaksampit.NavBottom.Timeline.TimelineFragment;
 
 
 public class MainActivity extends AppCompatActivity implements MaterialSearchBar.OnSearchActionListener {
@@ -59,9 +59,6 @@ public class MainActivity extends AppCompatActivity implements MaterialSearchBar
                         startActivity(new Intent(MainActivity.this, LoginActivity.class));
                     }
                     return true;
-                case R.id.navigation_pesan:
-                    linearLayout.setVisibility(View.VISIBLE);
-                    return true;
                 case R.id.navigation_favorit:
                     Endpoints.loggedIn = sharedPreferences.getBoolean(Endpoints.SharedPref_Loggedin, false);
                     if (Endpoints.loggedIn) {
@@ -72,6 +69,13 @@ public class MainActivity extends AppCompatActivity implements MaterialSearchBar
                     }else{
                         startActivity(new Intent(MainActivity.this, LoginActivity.class));
                     }
+                    return true;
+                case R.id.navigation_pesan:
+                    mManager.beginTransaction().replace(
+                            R.id.ganti_tampilan,
+                            new MoreFragment()).commit();
+                    linearLayout.setVisibility(View.GONE);
+
                     return true;
             }
             return false;

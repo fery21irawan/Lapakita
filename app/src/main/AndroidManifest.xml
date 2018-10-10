@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -24,7 +24,7 @@
         </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".Jual.JualActivity" />
+        <activity android:name=".NavBottom.Jual.JualActivity" />
 
         <service
             android:name=".Firebase.MyFirebaseMessagingService"
@@ -47,9 +47,11 @@
             android:resource="@color/colorAccent" />
 
         <activity
-            android:name=".Produk.DetailProdukActivity"
+            android:name=".Data.Produk.DetailProdukActivity"
             android:label="@string/title_activity_detail_produk"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".Data.Kategori.KategoriActivity" />
+        <activity android:name=".Data.Profil.ProfilActivity"></activity>
     </application>
 
 </manifest>

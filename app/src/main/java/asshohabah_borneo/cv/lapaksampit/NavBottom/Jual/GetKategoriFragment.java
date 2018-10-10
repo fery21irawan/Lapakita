@@ -23,12 +23,13 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import asshohabah_borneo.cv.lapaksampit.R;
 import asshohabah_borneo.cv.lapaksampit.Server.Endpoints;
 import asshohabah_borneo.cv.lapaksampit.Server.RequestHandler;
 
-public class GetKategoriFragment extends DialogFragment implements AdapterView.OnItemClickListener {
+public class GetKategoriFragment extends DialogFragment implements AdapterView.OnItemClickListener, SearchView.OnQueryTextListener {
     ListView listView;
     private String JSON_STRING;
     SearchView sv;
@@ -67,9 +68,22 @@ public class GetKategoriFragment extends DialogFragment implements AdapterView.O
          */
         sv      = view.findViewById(R.id.searchView1);
         sv.setQueryHint("Search..");
+        sv.setOnQueryTextListener(this);
         listView = view.findViewById(R.id.listView);
         listView.setOnItemClickListener(this);
         getJSON();
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        String text = newText;
+        ((SimpleAdapter)GetKategoriFragment.this.adapter).getFilter().filter(text);
+        return false;
     }
 
     private void FetchKategori() {
@@ -142,4 +156,5 @@ public class GetKategoriFragment extends DialogFragment implements AdapterView.O
         JualActivity.i_kategori.setText(kd);
         GetKategoriFragment.super.dismiss();
     }
+
 }

@@ -2,6 +2,7 @@ package asshohabah_borneo.cv.lapaksampit.NavBottom.Home;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import asshohabah_borneo.cv.lapaksampit.Data.Kategori.KategoriActivity;
 import asshohabah_borneo.cv.lapaksampit.R;
 
 
@@ -49,6 +51,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             @Override
             public void onClick(View view) {
                 Toast.makeText(mCtx, "Anda Menyentuh "+Name, Toast.LENGTH_SHORT).show();
+                mCtx.startActivity(new Intent(mCtx, KategoriActivity.class));
             }
         });
     }

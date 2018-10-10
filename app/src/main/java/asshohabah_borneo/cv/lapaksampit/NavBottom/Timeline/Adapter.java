@@ -14,7 +14,7 @@ import com.daimajia.androidanimations.library.YoYo;
 
 import java.util.List;
 
-import asshohabah_borneo.cv.lapaksampit.NavBottom.Produk.DetailProdukActivity;
+import asshohabah_borneo.cv.lapaksampit.Data.Produk.DetailProdukActivity;
 import asshohabah_borneo.cv.lapaksampit.R;
 import asshohabah_borneo.cv.lapaksampit.Server.Endpoints;
 
