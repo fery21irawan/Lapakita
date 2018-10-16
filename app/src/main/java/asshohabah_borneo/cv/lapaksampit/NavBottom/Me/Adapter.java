@@ -32,7 +32,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mCtx);
-        View view = inflater.inflate(R.layout.grid_timeline_view, null);
+        View view = inflater.inflate(R.layout.timeline_view_grid, null);
         return new ViewHolder(view);
     }
 

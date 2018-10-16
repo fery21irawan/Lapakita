@@ -1,5 +1,6 @@
 package asshohabah_borneo.cv.lapaksampit;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,10 +14,14 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.mancj.materialsearchbar.MaterialSearchBar;
 
 import asshohabah_borneo.cv.lapaksampit.NavBottom.Home.HomeFragment;
+import asshohabah_borneo.cv.lapaksampit.NavBottom.Home.HomeFragmentV2;
+import asshohabah_borneo.cv.lapaksampit.NavBottom.Home.Kategori.KategoriFragment;
 import asshohabah_borneo.cv.lapaksampit.NavBottom.Jual.JualActivity;
 import asshohabah_borneo.cv.lapaksampit.NavBottom.Lainnya.MoreFragment;
 import asshohabah_borneo.cv.lapaksampit.NavBottom.Me.MeFragment;
@@ -24,15 +29,13 @@ import asshohabah_borneo.cv.lapaksampit.Server.Endpoints;
 import asshohabah_borneo.cv.lapaksampit.NavBottom.Timeline.TimelineFragment;
 
 
-public class MainActivity extends AppCompatActivity implements MaterialSearchBar.OnSearchActionListener {
+public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
     private static final int REQUEST_GALLERY_CODE = 200;
-
+    SearchView searchView;
+    public static String DataSearch = null;
     public static String UserId, SharedUserId;
     SharedPreferences sharedPreferences;
-    MaterialSearchBar searchBar;
-
     FragmentManager mManager = getSupportFragmentManager();
-    LinearLayout linearLayout;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -40,16 +43,14 @@ public class MainActivity extends AppCompatActivity implements MaterialSearchBar
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    linearLayout.setVisibility(View.VISIBLE);
-                    mManager.beginTransaction().replace(
-                            R.id.ganti_tampilan,
-                            new HomeFragment()).commit();
-                    return true;
-                case R.id.navigation_kategori:
-                    linearLayout.setVisibility(View.VISIBLE);
                     mManager.beginTransaction().replace(
                             R.id.ganti_tampilan,
                             new TimelineFragment()).commit();
+                    return true;
+                case R.id.navigation_kategori:
+                    mManager.beginTransaction().replace(
+                            R.id.ganti_tampilan,
+                            new KategoriFragment()).commit();
                     return true;
                 case R.id.navigation_jual:
                     Endpoints.loggedIn = sharedPreferences.getBoolean(Endpoints.SharedPref_Loggedin, false);
@@ -65,7 +66,6 @@ public class MainActivity extends AppCompatActivity implements MaterialSearchBar
                         mManager.beginTransaction().replace(
                                 R.id.ganti_tampilan,
                                 new MeFragment()).commit();
-                        linearLayout.setVisibility(View.GONE);
                     }else{
                         startActivity(new Intent(MainActivity.this, LoginActivity.class));
                     }
@@ -74,7 +74,6 @@ public class MainActivity extends AppCompatActivity implements MaterialSearchBar
                     mManager.beginTransaction().replace(
                             R.id.ganti_tampilan,
                             new MoreFragment()).commit();
-                    linearLayout.setVisibility(View.GONE);
 
                     return true;
             }
@@ -86,15 +85,8 @@ public class MainActivity extends AppCompatActivity implements MaterialSearchBar
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        /**
-         * Initialize and set SearchBar
-         */
-        searchBar = (MaterialSearchBar) findViewById(R.id.searchBar);
-        searchBar.setOnSearchActionListener(this);
-        searchBar.setText("Hello World!");
-        Log.d("LOG_TAG", getClass().getSimpleName() + ": text " + searchBar.getText());
-        searchBar.setCardViewElevation(10);
+        searchView = findViewById(R.id.searchView);
+        searchView.setOnQueryTextListener(this);
 
         UserId = null;
         SharedUserId = "1";
@@ -102,38 +94,28 @@ public class MainActivity extends AppCompatActivity implements MaterialSearchBar
         /**
          * Fetching the boolean value form sharedpreferences
          */
-
-        linearLayout = findViewById(R.id.linear);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_LABELED);
        // BottomNavigationViewHelper.disableShiftMode(navigation);
         mManager.beginTransaction().replace(
                 R.id.ganti_tampilan,
-                new HomeFragment()).commit();
+                new TimelineFragment()).commit();
+       /* mManager.beginTransaction().replace(
+                R.id.layout_populer,
+                new HomeFragment()).commit();*/
     }
 
     @Override
-    public void onSearchStateChanged(boolean enabled) {
-
+    public boolean onQueryTextSubmit(String query) {
+        DataSearch = query;
+        Toast.makeText(MainActivity.this, DataSearch, Toast.LENGTH_LONG).show();
+        return false;
     }
 
     @Override
-    public void onSearchConfirmed(CharSequence text) {
-
-    }
-
-    @Override
-    public void onButtonClicked(int buttonCode) {
-        switch (buttonCode){
-            /*case MaterialSearchBar.BUTTON_NAVIGATION:
-                break;
-            case MaterialSearchBar.BUTTON_SPEECH:
-                break;*/
-            case MaterialSearchBar.BUTTON_BACK:
-                searchBar.disableSearch();
-                break;
-        }
-
+    public boolean onQueryTextChange(String newText) {
+        //Toast.makeText(MainActivity.this, "Yeeeeeeeee", Toast.LENGTH_LONG).show();
+        return false;
     }
 }

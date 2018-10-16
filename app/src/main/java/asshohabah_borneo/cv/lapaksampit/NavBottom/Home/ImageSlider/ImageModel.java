@@ -1,4 +1,4 @@
-package asshohabah_borneo.cv.lapaksampit.NavBottom.Home;
+package asshohabah_borneo.cv.lapaksampit.NavBottom.Home.ImageSlider;
 
 public class ImageModel {
 

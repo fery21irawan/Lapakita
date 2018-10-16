@@ -24,21 +24,25 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import asshohabah_borneo.cv.lapaksampit.NavBottom.Home.Kategori.AdapterKategori;
+import asshohabah_borneo.cv.lapaksampit.NavBottom.Home.Populer.AdapterPopuler;
+import asshohabah_borneo.cv.lapaksampit.NavBottom.Home.Spesial.AdapterSpecial;
+import asshohabah_borneo.cv.lapaksampit.NavBottom.Home.Spesial.ModelSpecial;
 import asshohabah_borneo.cv.lapaksampit.R;
 import asshohabah_borneo.cv.lapaksampit.Server.Endpoints;
 
-import static asshohabah_borneo.cv.lapaksampit.NavBottom.Home.InitializeHomeAdapter.getModel;
+//import static asshohabah_borneo.cv.lapaksampit.NavBottom.Home.InitializeHomeAdapter.getModel;
 import static asshohabah_borneo.cv.lapaksampit.NavBottom.Home.InitializeHomeAdapter.getModelPopuler;
 
 
 public class HomeFragment extends Fragment {
     View view;
     private RecyclerView recyclerView, recyclerViewSpecial, recyclerViewPopuler ;
-    Adapter adapter;
+    AdapterKategori adapter;
     AdapterSpecial adapterSpecial;
     AdapterPopuler adapterPopuler;
     List<ModelSpecial> Special = new ArrayList<>();
-    //  Model model;
+    //  ModelKategori model;
 
 
 
@@ -48,8 +52,8 @@ public class HomeFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerview);
         recyclerViewSpecial = view.findViewById(R.id.recyclerview_special);
         recyclerViewPopuler = view.findViewById(R.id.recyclerview_populer);
-        //Setting Adapter
-        adapter = new Adapter(getActivity(), getModel());
+        //Setting AdapterKategori
+       // adapter = new AdapterKategori(getActivity(), getModel());
         adapterSpecial = new AdapterSpecial(getActivity(), Special);
         adapterPopuler = new AdapterPopuler(getActivity(), getModelPopuler());
 
@@ -75,8 +79,8 @@ public class HomeFragment extends Fragment {
         indicator = view.findViewById(R.id.indicator);
 
         recyclerView = view.findViewById(R.id.recycler_view);
-        adapter = new MenuAdapter(getActivity(), getData());
-        recyclerView.setAdapter(adapter);
+        adapterKategori = new MenuAdapter(getActivity(), getData());
+        recyclerView.setAdapter(adapterKategori);
         recyclerView.setHasFixedSize(true);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext().getApplicationContext(), 3);
         //gridLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);

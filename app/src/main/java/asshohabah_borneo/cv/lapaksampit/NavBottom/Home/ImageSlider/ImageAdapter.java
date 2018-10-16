@@ -1,4 +1,4 @@
-package asshohabah_borneo.cv.lapaksampit.NavBottom.Home;
+package asshohabah_borneo.cv.lapaksampit.NavBottom.Home.ImageSlider;
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;

@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.daimajia.androidanimations.library.Techniques;
@@ -32,8 +33,19 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mCtx);
-        View view = inflater.inflate(R.layout.grid_timeline_view, null);
+        View view = inflater.inflate(R.layout.grid_two_column, null);
         return new ViewHolder(view);
+    }
+    class ViewHolder extends RecyclerView.ViewHolder {
+
+        ImageView Gambar;
+        TextView title;
+
+        public ViewHolder(View itemView) {
+            super(itemView);
+            Gambar = itemView.findViewById(R.id.image);
+            title = itemView.findViewById(R.id.title);
+        }
     }
 
     @Override
@@ -46,6 +58,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         Glide.with(mCtx)
                 .load(Image)
                 .into(holder.Gambar);
+        holder.title.setText(Name);
         //loading the image
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,14 +81,5 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         return modelList.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
-
-        ImageView Gambar;
-
-        public ViewHolder(View itemView) {
-            super(itemView);
-            Gambar = itemView.findViewById(R.id.image);
-        }
-    }
 }
 

@@ -3,13 +3,15 @@ package asshohabah_borneo.cv.lapaksampit.NavBottom.Home;
 import java.util.ArrayList;
 import java.util.List;
 
+import asshohabah_borneo.cv.lapaksampit.NavBottom.Home.Kategori.ModelKategori;
+import asshohabah_borneo.cv.lapaksampit.NavBottom.Home.Populer.ModelPopuler;
 import asshohabah_borneo.cv.lapaksampit.R;
 
 public class InitializeHomeAdapter {
-    public static List<ModelSpecial> Special = new ArrayList<>();
-    AdapterSpecial adapterSpecial;
-    public static List<Model> getModel() {
-        List<Model> model = new ArrayList<>();
+    /*public static List<ModelSpecial> Special = new ArrayList<>();
+    AdapterSpecial adapterSpecial;*/
+    /*public static List<ModelKategori> getModel() {
+        List<ModelKategori> model = new ArrayList<>();
         Integer image[] = {
                 R.drawable.icon_fashion_man,
                 R.drawable.icon_laptop,
@@ -30,15 +32,26 @@ public class InitializeHomeAdapter {
                 "Souvenir",
                 "Mainan"
         };
+        String kd[] = {
+                "KTG003",
+                "Elektronik & Aksesoris",
+                "KTG005",
+                "KTG011",
+                "KTG009",
+                "KTG004",
+                "Souvenir",
+                "KTG001"
+        };
 
-        for (int i = 0; i < image.length && i < name.length; i++) {
-            Model current = new Model();
+        for (int i = 0; i < image.length && i < name.length && i < kd.length; i++) {
+            ModelKategori current = new ModelKategori();
             current.image = image[i];
             current.name = name[i];
+            current.kode = kd[i];
             model.add(current);
         }
         return model;
-    }
+    }*/
 
     public static List<ModelPopuler> getModelPopuler() {
         List<ModelPopuler> modelPopuler = new ArrayList<>();

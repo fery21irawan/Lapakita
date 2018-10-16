@@ -1,8 +1,9 @@
-package asshohabah_borneo.cv.lapaksampit.NavBottom.Home;
+package asshohabah_borneo.cv.lapaksampit.NavBottom.Home.Populer;
 
-public class Model {
-    int image;
-    String name;
+public class ModelPopuler {
+    public int image;
+    public String name;
+    public Double harga;
 /*
     public Model(Integer image, String name) {
         this.image = image;

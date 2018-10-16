@@ -1,9 +1,7 @@
-package asshohabah_borneo.cv.lapaksampit.NavBottom.Me;
+package asshohabah_borneo.cv.lapaksampit.NavBottom.Timeline;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -14,9 +12,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -31,68 +26,30 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import asshohabah_borneo.cv.lapaksampit.Data.Profil.ProfilActivity;
-import asshohabah_borneo.cv.lapaksampit.MainActivity;
+import asshohabah_borneo.cv.lapaksampit.Helper.OnLoadMoreListener;
 import asshohabah_borneo.cv.lapaksampit.R;
 import asshohabah_borneo.cv.lapaksampit.Server.Endpoints;
 
 
-public class MeFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+/*
+ * Created by Fery Irawan on 10/11/18 12:11 PM
+ * Copyright (c) 2018 . All rights reserved.
+ * Last modified 10/11/18 12:09 PM
+ */
+
+public class TimelineFragmentBackup extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     View view;
     RecyclerView recyclerView;
-    Adapter adapter;
-    Button btnCall, btnChat, btnSettings;
-    SharedPreferences sharedPreferences;
-    ImageView p_image;
-    TextView p_nama, p_alamat;
-
+    DataAdapter adapter;
     SwipeRefreshLayout swipe;
     List<Model> modelList = new ArrayList<>();
     private RecyclerView.LayoutManager layoutManager;
+    protected Handler handler;
 
-    /**
-     * Membuat Fungsi setting data untuk sharedpreferences
-     * @param data
-     * @return
-     */
-    private String setPref(String data){
-        return sharedPreferences.getString(data,"");
-    }
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_me, container, false);
-        p_image = view.findViewById(R.id.p_image);
-        p_nama  = view.findViewById(R.id.p_nama);
-        p_alamat = view.findViewById(R.id.p_alamat);
-        sharedPreferences = getActivity().getSharedPreferences(Endpoints.SharedPref_Nama, Context.MODE_PRIVATE);
-        btnCall = view.findViewById(R.id.btnCall);
-        btnChat = view.findViewById(R.id.btnChat);
-        btnSettings = view.findViewById(R.id.btnSettings);
-        btnCall.setText(sharedPreferences.getString(Endpoints.SharedPref_No_Telp, ""));
-        btnSettings.setVisibility(View.VISIBLE);
-        btnSettings.setText("Edit Profile");
-        btnSettings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getContext(), ProfilActivity.class));
-            }
-        });
-
-        /**
-         * Fetch data yang di sharedpreferences
-         */
-
-        p_nama.setText(setPref(Endpoints.SharedPref_NM));
-        p_alamat.setText(setPref(Endpoints.SharedPref_Alamat));
-
-       /* if(UserId == SharedUserId){
-            btnSettings.setVisibility(View.VISIBLE);
-        }
-        if(UserId != SharedUserId){
-            btnCall.setVisibility(View.VISIBLE);
-            btnChat.setVisibility(View.VISIBLE);
-        }*/
-
+        view = inflater.inflate(R.layout.fragment_timeline, container, false);
 
         setHasOptionsMenu(true);
 
@@ -106,10 +63,36 @@ public class MeFragment extends Fragment implements SwipeRefreshLayout.OnRefresh
 
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        adapter = new Adapter(this.getContext(),modelList);
+        adapter = new DataAdapter(this.getContext(),modelList, recyclerView);
 
         recyclerView.setAdapter(adapter);
+        handler = new Handler();
+        adapter.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void OnLoadMore() {
+                modelList.add(null);
+                adapter.notifyItemInserted(modelList.size() - 1);
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        //   remove progress item
+                        modelList.remove(modelList.size() - 1);
+                        adapter.notifyItemRemoved(modelList.size());
+                        //add items one by one
+                        int start = modelList.size();
+                        int end = start + 20;
 
+                        for (int i = start + 1; i <= end; i++) {
+                            //
+                            adapter.notifyItemInserted(modelList.size());
+                        }
+                        adapter.setLoaded();
+                        //or you can add all at once but do not forget to call mAdapter.notifyDataSetChanged();
+                    }
+                }, 2000);
+
+            }
+        });
         swipe   = (SwipeRefreshLayout) view.findViewById(R.id.swlayout);
         swipe.setVisibility(View.VISIBLE);
         swipe.setOnRefreshListener(this);
@@ -124,9 +107,9 @@ public class MeFragment extends Fragment implements SwipeRefreshLayout.OnRefresh
                        }
                    }
         );
+
         return view;
     }
-
     @Override
     public void onRefresh() {
         modelList.clear();
@@ -134,8 +117,8 @@ public class MeFragment extends Fragment implements SwipeRefreshLayout.OnRefresh
         loadData();
     }
     private void loadData() {
-        final String url = Endpoints.Produk_URL+"?kd_pengguna="+setPref(Endpoints.SharedPref_KD);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Endpoints.Produk_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -162,7 +145,6 @@ public class MeFragment extends Fragment implements SwipeRefreshLayout.OnRefresh
                                         jo.getString(Endpoints.Produk_Harga)
                                 ));
                                 Log.d("lihat", jo.getString(Endpoints.Produk_GBR));
-                                Log.d("my_URL", url);
                             }
 
                         } catch (JSONException e) {

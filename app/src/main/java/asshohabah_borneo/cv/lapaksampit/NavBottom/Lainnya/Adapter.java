@@ -6,9 +6,12 @@ package asshohabah_borneo.cv.lapaksampit.NavBottom.Lainnya;
  * Last modified 10/9/18 3:31 PM
  */
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -84,12 +87,33 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
                     break;
 
                 case 3:
-                    SharedPreferences sharedPreferences = mCtx.getSharedPreferences(Endpoints.SharedPref_Nama, Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.clear();
-                    editor.commit();
-                    Intent intent = new Intent(mCtx, MainActivity.class);
-                    mCtx.startActivity(intent);
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mCtx);
+                    alertDialogBuilder.setMessage("Logout ?");
+                    alertDialogBuilder.setPositiveButton("Ya",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface arg0, int arg1) {
+                                    SharedPreferences sharedPreferences = mCtx.getSharedPreferences(Endpoints.SharedPref_Nama, Context.MODE_PRIVATE);
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.clear();
+                                    editor.commit();
+                                    Intent intent = new Intent(mCtx, MainActivity.class);
+                                    mCtx.startActivity(intent);
+                                    ((Activity)mCtx).finish();
+                                }
+                            });
+
+                    alertDialogBuilder.setNegativeButton("Tidak",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface arg0, int arg1) {
+
+                                }
+                            });
+
+                    //Showing the alert dialog
+                    AlertDialog alertDialog = alertDialogBuilder.create();
+                    alertDialog.show();
                     break;
             }
 
